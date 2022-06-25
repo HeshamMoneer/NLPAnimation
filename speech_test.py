@@ -32,7 +32,7 @@ voices = ["com.apple.speech.synthesis.voice.Alex",
 # for voice in nssp.availableVoices():
 for voice in voices:
    ve.setVoice_(voice)
-   print voice
+   print(voice)
    ve.startSpeakingString_(text)
    while ve.isSpeaking():
       time.sleep(1)

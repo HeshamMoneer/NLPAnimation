@@ -27,10 +27,10 @@ def speak_word(word, waittime):
 
 file_content = open("sample.txt").read()
 tokens = nltk.word_tokenize(file_content)
-print tokens
+print(tokens)
 
 entries = nltk.corpus.cmudict.entries()
-print len(entries)
+print(len(entries))
 
 start_time = time.time()
 TextToSpeech = []
@@ -42,7 +42,7 @@ for token in tokens:
             break
 end_time = time.time()
 #Debug!
-print "Pre-processing Done! Time: %s Seconds"%(end_time - start_time)
+print("Pre-processing Done! Time: %s Seconds"%(end_time - start_time))
 #print TextToSpeech
 #print phonemes.mouths
 #print phonemes.PhonemeToMouth
@@ -80,7 +80,7 @@ for word in TextToSpeech:
     try:
         t = thread.start_new_thread(speak_word, (word[0], timeForAWord ) )
     except:
-        print "Error: unable to start thread for audio =/"
+        print("Error: unable to start thread for audio =/")
 
     #Show Mouths
     for mouth in MouthsToShow:

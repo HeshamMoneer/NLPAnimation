@@ -12,7 +12,7 @@ file_content = open("sample.txt").read()
 
 # Creating Tokens based on the text on the file
 tokens = nltk.word_tokenize(file_content)
-print tokens
+print(tokens)
 
 # Getting from the library the phonemes of all English Words
 entries = nltk.corpus.cmudict.entries()
@@ -57,7 +57,7 @@ ve = nssp.alloc().init()
 # "com.apple.speech.synthesis.voice.Zarvox"
 
 #ve.setVoice_("com.apple.speech.synthesis.voice.Zarvox")
-print file_content
+print(file_content)
 #ve.startSpeakingString_(file_content)
 
 time.sleep(1)

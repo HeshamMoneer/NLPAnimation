@@ -9,11 +9,11 @@ import sys
 mouths = {}
 for i in os.listdir("./mouths"):
     if i.endswith(".jpg"):
-        print i
+        print(i)
         img = cv2.imread("./mouths" + "/" + i, 0)
         mouths["" + i] = img
         continue
-print mouths
+print(mouths)
 
 actualImg = mouths.itervalues().next()
 

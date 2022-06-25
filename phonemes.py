@@ -87,7 +87,7 @@ Z       blair_c_d_g_k_n_r_s_th_y_z.jpg
 mouths = {}
 for i in os.listdir("./mouths"):
     if i.endswith(".jpg"):
-        print i
+        print(i)
         img = cv2.imread("./mouths" + "/" + i, 0)
         mouths["" + i] = img
         continue
