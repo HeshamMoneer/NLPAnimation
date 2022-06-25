@@ -38,6 +38,8 @@ print("Pre-processing Done! Time: %s Seconds"%(end_time - start_time))
 engine = pyttsx3.init()
 engine.setProperty('voice', 'english_rp+f3')
 
+result = cv2.VideoWriter('project.avi',cv2.VideoWriter_fourcc(*'mp4v'), 15, (300,300), isColor=False)
+
 ## For each mouth you should put a refering mouth to show
 ## do the double check
 for word in TextToSpeech:
@@ -69,8 +71,11 @@ for word in TextToSpeech:
     #Show Mouths
     for mouth in MouthsToShow:
         img = phonemes.mouths[mouth[0]]
+        result.write(img)
         cv2.imshow('window', img)
         cv2.waitKey(1)
         time.sleep(mouth[1])
 
     t.join()
+
+result.release()
