@@ -7,8 +7,8 @@ import pyttsx3
 from threading import Thread
 
 #Defines
-timePerPhoneme = 0.1
-longPhonemeBonus = 0.03
+timePerPhoneme = 0.04
+longPhonemeBonus = 0
 smallPhonemeBonus = -0.03
 
 # called by each thread
@@ -36,6 +36,7 @@ end_time = time.time()
 print("Pre-processing Done! Time: %s Seconds"%(end_time - start_time))
 
 engine = pyttsx3.init()
+engine.setProperty('voice', 'english_rp+f3')
 
 ## For each mouth you should put a refering mouth to show
 ## do the double check
