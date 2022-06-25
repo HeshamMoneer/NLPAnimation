@@ -1,59 +1,47 @@
 import cv2
-import numpy as np
-import os
 import time
-import sys
 import nltk
 import phonemes
-import threading
 import time
-from  AppKit import NSSpeechSynthesizer
+import pyttsx3
+from threading import Thread
 
 #Defines
-timePerPhoneme = 0.15
-longPhonemeBonus = 0.05
-smallPhonemeBonus = -0.05
+timePerPhoneme = 0.1
+longPhonemeBonus = 0.03
+smallPhonemeBonus = -0.03
 
 # called by each thread
-def speak_word(word, waittime):
-    nssp = NSSpeechSynthesizer
-    ve = nssp.alloc().init()
-    ve.setVoice_("com.apple.speech.synthesis.voice.Alex")
-    ve.startSpeakingString_(word)
-
-    time.sleep(waittime)
+def speak_word(word, time, engine):
+    engine.setProperty('rate', time)
+    engine.say(word)
+    engine.runAndWait()
     return
 
 
 file_content = open("sample.txt").read()
 tokens = nltk.word_tokenize(file_content)
-print(tokens)
 
 entries = nltk.corpus.cmudict.entries()
-print(len(entries))
 
 start_time = time.time()
 TextToSpeech = []
 for token in tokens:
     for entry in entries:
         if token.lower() == entry[0]:
-            #print entry
             TextToSpeech.append(entry)
             break
 end_time = time.time()
 #Debug!
 print("Pre-processing Done! Time: %s Seconds"%(end_time - start_time))
-#print TextToSpeech
-#print phonemes.mouths
-#print phonemes.PhonemeToMouth
 
+engine = pyttsx3.init()
 
 ## For each mouth you should put a refering mouth to show
 ## do the double check
 for word in TextToSpeech:
     # cv2.imshow('window', phonemes.mouths['blair_rest.jpg'])
     # cv2.waitKey(1)
-    # Get the right list of mouths
 
     timeForAWord = 0.0
     timeOfThisPhoneme = 0.0
@@ -73,14 +61,9 @@ for word in TextToSpeech:
                 MouthsToShow.append((value, timeOfThisPhoneme))
 
 
-    #Debug!
-    #print MouthsToShow
 
-    # Call co-routine to speak
-    try:
-        t = threading.start_new_thread(speak_word, (word[0], timeForAWord ) )
-    except:
-        print("Error: unable to start thread for audio =/")
+    t = Thread(target=speak_word, args=(word[0], timeForAWord, engine))
+    t.start()
 
     #Show Mouths
     for mouth in MouthsToShow:
@@ -88,3 +71,5 @@ for word in TextToSpeech:
         cv2.imshow('window', img)
         cv2.waitKey(1)
         time.sleep(mouth[1])
+
+    t.join()

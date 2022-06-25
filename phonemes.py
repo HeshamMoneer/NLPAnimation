@@ -1,9 +1,5 @@
 import cv2
-import numpy as np
 import os
-import time
-import sys
-import nltk
 
 """
 Phoneme Example Translation    Phoneme Example Translation
@@ -87,7 +83,6 @@ Z       blair_c_d_g_k_n_r_s_th_y_z.jpg
 mouths = {}
 for i in os.listdir("./Mouths"):
     if i.endswith(".jpg"):
-        print(i)
         img = cv2.imread("./Mouths" + "/" + i, 0)
         mouths["" + i] = img
         continue
@@ -133,13 +128,3 @@ PhonemeToMouth={'AA':'blair_o.jpg',
 'Y':'blair_c_d_g_k_n_r_s_th_y_z.jpg',
 'ZH':'blair_c_d_g_k_n_r_s_th_y_z.jpg',
 'Z':'blair_c_d_g_k_n_r_s_th_y_z.jpg'}
-
-#
-# actualImg = mouths.itervalues().next()
-#
-# ## Ploting them as an animation
-# for key,value in mouths.items():
-#     ### Fast mouth showing
-#     cv2.imshow('window', value)
-#     cv2.waitKey(1)
-#     time.sleep(0.2)
