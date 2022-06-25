@@ -5,7 +5,7 @@ import time
 import sys
 import nltk
 import phonemes
-import thread
+import threading
 import time
 from  AppKit import NSSpeechSynthesizer
 
@@ -78,7 +78,7 @@ for word in TextToSpeech:
 
     # Call co-routine to speak
     try:
-        t = thread.start_new_thread(speak_word, (word[0], timeForAWord ) )
+        t = threading.start_new_thread(speak_word, (word[0], timeForAWord ) )
     except:
         print("Error: unable to start thread for audio =/")
 
