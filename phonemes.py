@@ -85,10 +85,10 @@ Z       blair_c_d_g_k_n_r_s_th_y_z.jpg
 
 ## Importing all the mouth images
 mouths = {}
-for i in os.listdir("./mouths"):
+for i in os.listdir("./Mouths"):
     if i.endswith(".jpg"):
         print(i)
-        img = cv2.imread("./mouths" + "/" + i, 0)
+        img = cv2.imread("./Mouths" + "/" + i, 0)
         mouths["" + i] = img
         continue
 #print mouths
